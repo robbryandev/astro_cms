@@ -1,17 +1,9 @@
 ---
-import {getPageEndpointBySlug} from "@/utils/endpoints";
+import {getPageBySlug} from "@/utils/endpoints";
 import {type WpPage} from "@/types/Page";
 
 const slug = Astro.params["slug"];
-const pageReq = await fetch(getPageEndpointBySlug(slug!));
-let slugArray: WpPage[] | null = null;
-let slugPage: WpPage | null = null;
-if (pageReq.ok) {
-	slugArray = await pageReq.json();
-	if (slugArray!.length > 0) {
-		slugPage = slugArray![0];
-	}
-}
+let slugPage: WpPage | null = await getPageBySlug(slug!);
 ---
 
 <html lang="en">
@@ -27,7 +19,7 @@ if (pageReq.ok) {
 			slugPage ? (
 				slugPage.content.rendered
 			) : (
-				"<p>An error has occured </p>"
+				`<p>Couldn't fetch page: ${slug}</p>`
 			)
 		}/>
 	</body>
