@@ -1,5 +1,12 @@
 ---
+import {getPageEndpoint} from "@/utils/endpoints";
+import {type WpPage} from "@/types/Page";
 
+const pageReq = await fetch(getPageEndpoint(2));
+let samplePage: WpPage | null = null;
+if (pageReq.ok) {
+	samplePage = await pageReq.json();
+}
 ---
 
 <html lang="en">
@@ -11,6 +18,12 @@
 		<title>Astro</title>
 	</head>
 	<body>
-		<h1>Astro</h1>
+		<div set:html={
+			samplePage ? (
+				samplePage.content.rendered
+			) : (
+				"<p>An error has occured </p>"
+			)
+		}/>
 	</body>
 </html>
