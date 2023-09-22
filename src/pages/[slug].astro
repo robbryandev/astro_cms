@@ -1,0 +1,34 @@
+---
+import {getPageEndpointBySlug} from "@/utils/endpoints";
+import {type WpPage} from "@/types/Page";
+
+const slug = Astro.params["slug"];
+const pageReq = await fetch(getPageEndpointBySlug(slug!));
+let slugArray: WpPage[] | null = null;
+let slugPage: WpPage | null = null;
+if (pageReq.ok) {
+	slugArray = await pageReq.json();
+	if (slugArray!.length > 0) {
+		slugPage = slugArray![0];
+	}
+}
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{slugPage?.title.rendered ?? "Astro"}</title>
+	</head>
+	<body>
+		<div set:html={
+			slugPage ? (
+				slugPage.content.rendered
+			) : (
+				"<p>An error has occured </p>"
+			)
+		}/>
+	</body>
+</html>

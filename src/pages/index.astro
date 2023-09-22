@@ -15,7 +15,7 @@ if (pageReq.ok) {
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
+		<title>{samplePage?.title.rendered ?? "Astro"}</title>
 	</head>
 	<body>
 		<div set:html={
