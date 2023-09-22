@@ -18,9 +18,9 @@ let slugPage: WpPage | null = await getPageBySlug(slug!);
 		<div set:html={
 			slugPage ? (
 				slugPage.content.rendered
-			) : (
-				`<p>Couldn't fetch page: ${slug}</p>`
-			)
-		}/>
+				) : (
+					`<p>Couldn't fetch page: ${slug}</p>`
+					)
+				}/>
 	</body>
 </html>
