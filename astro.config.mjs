@@ -9,5 +9,5 @@ export default defineConfig({
   adapter: nodejs({
     mode: "standalone"
   }),
-  integrations: [tailwind()]
+  integrations: [tailwind({applyBaseStyles: false})]
 });

@@ -1,11 +1,6 @@
 /** @type {import('tailwindcss').Config} */
+const {config} = require('./public/lib/tailwind/config');
+
 module.exports = {
-	content: [
-		'./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'
-	],
-	theme: {
-		extend: {},
-	},
-	plugins: [],
-	safelist: [{pattern:/.*/}]
+    presets: [config]
 }

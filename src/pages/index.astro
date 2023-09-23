@@ -1,4 +1,5 @@
 ---
+import Layout from "@/layouts/Layout.astro";
 import {getPageEndpoint} from "@/utils/endpoints";
 import {type WpPage} from "@/types/Page";
 
@@ -9,21 +10,12 @@ if (pageReq.ok) {
 }
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{samplePage?.title.rendered ?? "Astro"}</title>
-	</head>
-	<body>
-		<div set:html={
-			samplePage ? (
-				samplePage.content.rendered
-			) : (
-				"<p>An error has occured </p>"
-			)
-		}/>
-	</body>
-</html>
+<Layout title={samplePage?.title.rendered}>
+	<div set:html={
+		samplePage ? (
+			samplePage.content.rendered
+		) : (
+			"<p>An error has occured </p>"
+		)
+	}/>
+</Layout>

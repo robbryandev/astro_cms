@@ -1,0 +1,30 @@
+---
+interface Props {
+  title?: string
+}
+
+const { title } = Astro.props
+const defaultProps = {
+  title: "Astro"
+}
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script is:inline type="module" type="text/javascript" src="/lib/tailwind/tailwind.js"></script>
+    <script is:inline type="text/javascript" src="/lib/tailwind/config.js"></script>
+    <script is:inline type="module" type="text/javascript">
+      import {config} from "/lib/tailwind/config.js";
+
+      tailwind.config = config;
+    </script>
+    <title>{title ?? defaultProps.title}</title>
+  </head>
+  <body>
+    <main>
+      <slot />
+    </main>
+  </body>
+</html>

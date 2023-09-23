@@ -1,26 +1,17 @@
 ---
+import Layout from "@/layouts/Layout.astro";
 import {getPageBySlug} from "@/utils/endpoints";
 import {type WpPage} from "@/types/Page";
 
 const slug = Astro.params["slug"];
 let slugPage: WpPage | null = await getPageBySlug(slug!);
 ---
-
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{slugPage?.title.rendered ?? "Astro"}</title>
-	</head>
-	<body>
-		<div set:html={
-			slugPage ? (
-				slugPage.content.rendered
-				) : (
-					`<p>Couldn't fetch page: ${slug}</p>`
-					)
-				}/>
-	</body>
-</html>
+<Layout title={slugPage?.title.rendered}>
+	<div set:html={
+		slugPage ? (
+			slugPage.content.rendered
+			) : (
+				`<p>Couldn't fetch page: ${slug}</p>`
+				)
+	}/>
+</Layout>
